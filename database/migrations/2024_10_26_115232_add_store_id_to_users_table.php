@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workinghours', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('store_id')->nullable()->index();
-            $table->string('day');
-            $table->time('opening_time');
-            $table->time('closing_time');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('store_id')->nullable()->after('id'); // Use 'after' to specify the position
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('workinghours');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('store_id');
+        });
     }
 };

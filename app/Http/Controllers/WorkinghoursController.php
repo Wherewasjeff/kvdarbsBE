@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class WorkinghoursController extends Controller
-{
-    //
+class WorkinghoursController extends Controlle{
+    public function index(){
+
+    }
 }

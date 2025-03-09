@@ -1,21 +1,14 @@
 <?php
 
 return [
-
-    'paths' => ['api/*'],
-
-    'allowed_methods' => ['*'],  // Allow all methods or restrict to specific methods (e.g., ['GET', 'POST'])
-
-    'allowed_origins' => ['*'],  // Allow requests from your React frontend
-
-    'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],  // Allow all headers
-
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'allowed_methods' => ['*'],
+    'allowed_origins' => ['http://localhost:3000'], // Adjust if needed
+    'allowed_headers' => ['*'],
     'exposed_headers' => [],
-
     'max_age' => 0,
+    'supports_credentials' => true,
 
-    'supports_credentials' => true,  // If you're using cookies or sessions
 ];
+
 

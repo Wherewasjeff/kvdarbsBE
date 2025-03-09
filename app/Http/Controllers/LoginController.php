@@ -16,7 +16,10 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->with(['userAndStore:id,user_id,store_id'])->first();
+        $response = $user->toArray();
+        $response['store_id'] = $user->userAndStore ? $user->userAndStore->store_id : null;
+        unset($response['user_and_stores']);
 
         // Verify user and password
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -30,7 +33,7 @@ class LoginController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user,
+            'user' => $response,
         ]);
     }
 
